@@ -1,9 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete,Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { EmployeesService } from './employees.service';
 import { Prisma, Role } from '@prisma/client';
+
 @Controller('employees')
 export class EmployeesController {
-  constructor(private readonly employeesService: EmployeesService) {}
+  constructor(private readonly employeesService: EmployeesService) { }
 
   @Post()
   create(@Body() createEmployeeDto: Prisma.EmployeeCreateInput) {
@@ -11,7 +12,7 @@ export class EmployeesController {
   }
 
   @Get()
-  findAll(@Query('role')role?:Role) {
+  findAll(@Query('role') role?: Role) {
     return this.employeesService.findAll(role);
   }
 

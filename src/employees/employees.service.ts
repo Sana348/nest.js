@@ -1,18 +1,17 @@
 import { Injectable } from '@nestjs/common';
-import { Prisma ,Role} from '@prisma/client';
+import { Prisma, Role } from '@prisma/client';
 import { DatabaseService } from 'src/database/database.service';
+
 @Injectable()
 export class EmployeesService {
-  constructor(private readonly databaseService: DatabaseService) {}
-
-  async create(createEmployeeDto: Prisma.EmployeeCreateInput) {
+  constructor(private readonly databaseService: DatabaseService) { }
+   async create(createEmployeeDto: Prisma.EmployeeCreateInput) {
     return this.databaseService.employee.create({
-      data: createEmployeeDto,
-   
-    });
+      data: createEmployeeDto
+    })
   }
 
-  findAll(role?: Role ) {
+  async findAll(role?: Role) {
     if (role) return this.databaseService.employee.findMany({
       where: {
         role,
